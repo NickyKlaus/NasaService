@@ -1,0 +1,73 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Nasa service",
+    "description": "Nasa Service provides articles from the official site",
+    "contact": {
+      "name": "Nicky Klaus",
+      "url": "https://github.com/NickyKlaus"
+    },
+    "version": "1.0.0"
+  },
+  "schemes": [
+    "http", "https"
+  ],
+  "host": "127.0.0.1",
+  "paths": {
+    "/items": {
+      "get": {
+        "description": "Returns all items",
+        "produces": ["application/json"],
+        "summary": "Get items",
+        "responses": {
+          "200": {
+            "description": "A list of items",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Item"
+              }
+            }
+          },
+          "404": {
+            "description": "Items not found"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Item": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Item identifier",
+          "type": "string"
+        },
+        "date_created": {
+          "description": "Item publishing date",
+          "type": "string",
+          "format": "date-time"
+        },
+        "title": {
+          "description": "Item title",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of the item",
+          "type": "string"
+        },
+        "media_type": {
+          "description": "Item media type",
+          "type": "string"
+        },
+        "href": {
+          "description": "Item url",
+          "type": "string",
+          "format": "uri"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

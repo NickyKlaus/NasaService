@@ -1,0 +1,19 @@
+# Spring properties
+spring:
+  application:
+    name: nasaservice
+  data:
+    cassandra:
+      local-datacenter: ${NASA_DB_LOCAL_DC}
+      keyspaceName: ${NASA_DB_KEYSPACE}
+      contactPoints: ${NASA_DB_HOST}
+      port: ${NASA_DB_PORT}
+      schemaAction: CREATE_IF_NOT_EXISTS
+
+# HTTP Server (Tomcat) Port
+server:
+  port: 8090
+
+error:
+  whitelabel:
+    enabled: false
