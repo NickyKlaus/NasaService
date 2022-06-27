@@ -1,5 +1,5 @@
 {
-  "swagger": "2.0",
+  "openapi": "3.0.2",
   "info": {
     "title": "Nasa service",
     "description": "Nasa Service provides articles from the official site",
@@ -7,25 +7,48 @@
       "name": "Nicky Klaus",
       "url": "https://github.com/NickyKlaus"
     },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
     "version": "1.0.0"
   },
-  "schemes": [
-    "http", "https"
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  },
+  "servers": [
+    {
+      "url": "/api/v3"
+    }
   ],
-  "host": "127.0.0.1",
+
   "paths": {
     "/items": {
       "get": {
         "description": "Returns all items",
         "produces": ["application/json"],
         "summary": "Get items",
+        "operationId": "getItems",
         "responses": {
           "200": {
-            "description": "A list of items",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Item"
+            "description": "successful operation",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Item"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Item"
+                  }
+                }
               }
             }
           },
@@ -36,38 +59,40 @@
       }
     }
   },
-  "definitions": {
-    "Item": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "Item identifier",
-          "type": "string"
+  "components": {
+    "schemas": {
+      "Item": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "Item identifier",
+            "type": "string"
+          },
+          "date_created": {
+            "description": "Item publishing date",
+            "type": "string",
+            "format": "date-time"
+          },
+          "title": {
+            "description": "Item title",
+            "type": "string"
+          },
+          "description": {
+            "description": "Description of the item",
+            "type": "string"
+          },
+          "media_type": {
+            "description": "Item media type",
+            "type": "string"
+          },
+          "href": {
+            "description": "Item url",
+            "type": "string",
+            "format": "uri"
+          }
         },
-        "date_created": {
-          "description": "Item publishing date",
-          "type": "string",
-          "format": "date-time"
-        },
-        "title": {
-          "description": "Item title",
-          "type": "string"
-        },
-        "description": {
-          "description": "Description of the item",
-          "type": "string"
-        },
-        "media_type": {
-          "description": "Item media type",
-          "type": "string"
-        },
-        "href": {
-          "description": "Item url",
-          "type": "string",
-          "format": "uri"
-        }
-      },
-      "additionalProperties": false
+        "additionalProperties": false
+      }
     }
   }
 }
