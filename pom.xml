@@ -21,7 +21,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
-
+        <origami-plugin.version>0.0.3</origami-plugin.version>
         <guava.version>31.1-jre</guava.version>
         <spring-boot-starter-web.version>2.6.7</spring-boot-starter-web.version>
         <spring-boot.version>2.6.7</spring-boot.version>
@@ -31,9 +31,7 @@
         <springfox.version>3.0.0</springfox.version>
         <javax.validation.version>2.0.1.Final</javax.validation.version>
         <javax.xml.bind.version>2.4.0-b180830.0359</javax.xml.bind.version>
-
         <swagger-codegen-maven-plugin.version>3.0.28</swagger-codegen-maven-plugin.version>
-        <service-generator-plugin.version>0.0.2</service-generator-plugin.version>
         <spring-boot-maven-plugin.version>2.5.3</spring-boot-maven-plugin.version>
         <dockerfile-maven-plugin.version>1.4.13</dockerfile-maven-plugin.version>
 
@@ -104,8 +102,8 @@
         <plugins>
             <plugin>
                 <groupId>com.home</groupId>
-                <artifactId>service-generator-maven-plugin</artifactId>
-                <version>${service-generator-plugin.version}</version>
+                <artifactId>origami-maven-plugin</artifactId>
+                <version>${origami-plugin.version}</version>
                 <executions>
                     <execution>
                         <phase>generate-sources</phase>
