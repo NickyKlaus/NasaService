@@ -1,0 +1,52 @@
+version: "3"
+
+services:
+
+  # Preparation for generated services started
+  cassandra:
+    image: cassandra
+    container_name: cassandra
+    hostname: cassandradb
+    networks:
+      data-loading:
+        aliases:
+          - cassandradb
+    ports:
+      - 7000:7000
+      - 7001:7001
+      - 7199:7199
+      - 9042:9042
+      - 9160:9160
+    deploy:
+      resources:
+        limits:
+          cpus: "0.7"
+          memory: "8G"
+
+  # Run generated Nasa Service
+  nasaservice:
+    image: nickyklaus/nasaservice:latest
+    container_name: nasaservice
+    depends_on:
+      - cassandra
+    networks:
+      data-loading:
+        aliases:
+          - nasaservice
+    hostname: nasaservice
+    ports:
+      - 8090:8090
+    environment:
+      - NASA_DB_HOST=cassandradb
+      - NASA_DB_PORT=9042
+      - NASA_DB_KEYSPACE=nasa
+      - NASA_DB_LOCAL_DC=datacenter1
+    deploy:
+      resources:
+        limits:
+          cpus: "0.7"
+          memory: "1G"
+
+networks:
+  data-loading:
+    driver: "bridge"
